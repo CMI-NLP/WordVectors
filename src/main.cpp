@@ -27,31 +27,20 @@
 
 int main(int argc, char** argv)
 {
-    //nlp::dictionary dict;
-    //nlp::corpus corpus("/home/ramaseshan/Documents/NLP/TaCorpus/ta_100_tokens.txt");
-    //nlp::read_corpus read("/home/ramaseshan/word2vec-master/data/text8.en");
-    //std::vector<std::string> tokens = corpus.get_tokens(0,0);
-
-    //dict.freq_dist(tokens,2);
-
-    //for (auto it:dict.tf_p)
-    //std::cout << it.first << " " << it.second << std::endl;*/
-    //std::cout << "Number of tokens = " << corpus.ntokens() << std::endl;
-    //nlp::vocabulary v (tokens,100);
-    //std::vector<std::string> vocab = v.build();
-    //v.save("vocabulary.txt");
-    //nlp::ngrams ngms;
-    //std::vector<std::vector<std::string>> trigrams = ngms.extract(7,tokens,true);
-    /*     for (auto &i: trigrams){
-        std::cout << "(";
-        for (auto j: i)
-	        std::cout << j << " ";
-        std::cout << ")" << std::endl;
-
-    } */
-    //wove::hal hal ("/home/ramaseshan/Documents/NLP/TaCorpus/ta_1000000_tokens.txt");
-    //nlp::svd svd("hal_matrix.bin");
-    nlp::distance dist("svd_hal_matrix.bin", "vocabulary.txt", argv[1],
-                                     nlp::OTHERS,nlp::COSINE_DISTANCE);
+	//pass  the location of the corpus - one single file
+	//This will output 3 files 
+	//dict.txt - frequency distribution of words of the corpus
+	//vocabulary.txt - vocabulary of the corpus
+	//hal_matrix.bin - Armadillo matrix of word vectors in binary form
+	//wove::hal hal ("/home/ramaseshan/Documents/NLP/TaCorpus/ta_1000000_tokens.txt");
+    	//To find the word vectors use the distance class
+	nlp::distance dist("hal_matrix.bin", "vocabulary.txt", argv[1],
+                                     nlp::HAL,nlp::COSINE_DISTANCE);
+	//create left and singular matrices and singular values. 
+	//Use the left singular values as word vectors. Pass the hal word vector file as argument.
+	//This will create a word vector matrix from the left singular values
+	//nlp::svd("hal_matrix.bin");
+    	//nlp::distance dist("svd_hal_matrix.bin", "vocabulary.txt", argv[1],
+        //                             nlp::OTHERS,nlp::COSINE_DISTANCE);
     return 1;
 }
